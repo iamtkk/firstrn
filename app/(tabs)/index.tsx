@@ -1,21 +1,8 @@
 import { useState } from 'react';
-import {
-  Image,
-  StyleSheet,
-  Platform,
-  Text,
-  Button,
-  View,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import GoalItem from '@/components/GoalItem';
+import GoalInput from '@/components/GoalInput';
 
 interface GoalItem {
   text: string;
@@ -23,14 +10,9 @@ interface GoalItem {
 }
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState('');
   const [courseGoals, setCourseGoals] = useState<GoalItem[]>([]);
 
-  function goalInputHandler(enteredText: string) {
-    setEnteredGoalText(enteredText);
-  }
-
-  function addGoalHandler() {
+  function addGoalHandler(enteredGoalText: string) {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
@@ -39,18 +21,11 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your course goal!"
-          onChangeText={goalInputHandler}
-        />
-        <Button title="Add Goal" onPress={addGoalHandler} />
-      </View>
+      <GoalInput onAddGoal={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}
-          renderItem={({ item }) => <GoalItem item={item} />}
+          renderItem={({ item }) => <GoalItem text={item.text} />}
           keyExtractor={(item) => item.id}
           alwaysBounceVertical={false}
         />
