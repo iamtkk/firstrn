@@ -21,11 +21,11 @@ function GoalInput({ onAddGoal }: GoalInputProps) {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
-        placeholder="Your course goal!"
+        placeholder='Your course goal!'
         onChangeText={goalInputHandler}
         value={enteredGoalText}
       />
-      <Button title="Add Goal" onPress={() => addGoalHandler} />
+      <Button title='Add Goal' onPress={addGoalHandler} />
     </View>
   );
 }
