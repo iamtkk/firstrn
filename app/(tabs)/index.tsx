@@ -15,6 +15,7 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import GoalItem from '@/components/GoalItem';
 
 interface GoalItem {
   text: string;
@@ -41,19 +42,15 @@ export default function App() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder='Your course goal!'
+          placeholder="Your course goal!"
           onChangeText={goalInputHandler}
         />
-        <Button title='Add Goal' onPress={addGoalHandler} />
+        <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoals}
-          renderItem={({ item }) => (
-            <View style={styles.goalItem}>
-              <Text style={styles.goalText}>{item.text}</Text>
-            </View>
-          )}
+          renderItem={({ item }) => <GoalItem item={item} />}
           keyExtractor={(item) => item.id}
           alwaysBounceVertical={false}
         />
@@ -86,14 +83,5 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 3,
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#5e0acc',
-  },
-  goalText: {
-    color: 'white',
   },
 });
