@@ -31,6 +31,7 @@ function GoalInput({ onAddGoal, onCancel, visible }: GoalInputProps) {
       <View style={styles.inputContainer}>
         <Image
           source={require('../assets/images/goal.png')}
+          // source={require('/some/path/goal.png')}
           style={styles.image}
         />
         <TextInput
